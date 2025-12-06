@@ -53,7 +53,7 @@ public class TaskTrackerClient : ITaskTrackerClient
             
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<List<Product>>() ?? new List<Product>();
+            return await response.Content.ReadFromJsonAsync<List<Product>>() ?? new List<Product>();
         }
         catch (Exception ex)
         {
@@ -71,7 +71,7 @@ public class TaskTrackerClient : ITaskTrackerClient
             
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<Product>();
+            return await response.Content.ReadFromJsonAsync<Product>();
         }
         catch (Exception ex)
         {
@@ -92,7 +92,7 @@ public class TaskTrackerClient : ITaskTrackerClient
             
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<Product>() ?? product;
+            return await response.Content.ReadFromJsonAsync<Product>() ?? product;
         }
         catch (Exception ex)
         {

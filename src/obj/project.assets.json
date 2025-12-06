@@ -45,11 +45,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/vishwasrao/repos/minimal-api/minimal-api.csproj",
+      "projectUniqueName": "/Users/vishwasrao/repos/minimal-api-dotnet-10/src/minimal-api.csproj",
       "projectName": "minimal-api",
-      "projectPath": "/Users/vishwasrao/repos/minimal-api/minimal-api.csproj",
+      "projectPath": "/Users/vishwasrao/repos/minimal-api-dotnet-10/src/minimal-api.csproj",
       "packagesPath": "/Users/vishwasrao/.nuget/packages/",
-      "outputPath": "/Users/vishwasrao/repos/minimal-api/obj/",
+      "outputPath": "/Users/vishwasrao/repos/minimal-api-dotnet-10/src/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/vishwasrao/.nuget/NuGet/NuGet.Config"
