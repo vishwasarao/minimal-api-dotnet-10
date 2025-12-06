@@ -1,5 +1,9 @@
-/bin/
-/obj/
+
+# Ignore build outputs anywhere in the repository
+bin/
+obj/
+
+# IDE and user files
 .vs/
 *.user
 *.suo
