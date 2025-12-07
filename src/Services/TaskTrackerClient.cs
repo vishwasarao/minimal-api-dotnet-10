@@ -5,10 +5,10 @@ using System.Net.Http.Json;
 
 public interface ITaskTrackerClient
 {
-    Task<List<Product>> GetAllProductsAsync();
-    Task<Product?> GetProductByIdAsync(int id);
-    Task<Product> CreateProductAsync(Product product);
-    Task<bool> DeleteProductAsync(int id);
+    Task<List<TaskRequestDto>> GetAllTasksAsync();
+    Task<TaskRequestDto?> GetTaskByIdAsync(int id);
+    Task<TaskRequestDto> CreateTaskAsync(TaskRequestDto taskItem);
+    Task<bool> DeleteTaskAsync(int id);
 }
 
 public class TaskTrackerClient : ITaskTrackerClient
@@ -44,34 +44,34 @@ public class TaskTrackerClient : ITaskTrackerClient
         }
     }
 
-    public async Task<List<Product>> GetAllProductsAsync()
+    public async Task<List<TaskRequestDto>> GetAllTasksAsync()
     {
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}/products");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}/tasks");
             AddCorrelationIdHeader(request);
             
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<List<Product>>() ?? new List<Product>();
+            return await response.Content.ReadFromJsonAsync<List<TaskRequestDto>>() ?? new List<TaskRequestDto>();
         }
         catch (Exception ex)
         {
             // TODO: Add logging
-            return new List<Product>();
+            return new List<TaskRequestDto>();
         }
     }
 
-    public async Task<Product?> GetProductByIdAsync(int id)
+    public async Task<TaskRequestDto?> GetTaskByIdAsync(int id)
     {
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}/products/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}/tasks/{id}");
             AddCorrelationIdHeader(request);
             
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<Product>();
+            return await response.Content.ReadFromJsonAsync<TaskRequestDto>();
         }
         catch (Exception ex)
         {
@@ -80,32 +80,32 @@ public class TaskTrackerClient : ITaskTrackerClient
         }
     }
 
-    public async Task<Product> CreateProductAsync(Product product)
+    public async Task<TaskRequestDto> CreateTaskAsync(TaskRequestDto taskItem)
     {
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiBaseUrl}/products")
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiBaseUrl}/tasks")
             {
-                Content = JsonContent.Create(product)
+                Content = JsonContent.Create(taskItem)
             };
             AddCorrelationIdHeader(request);
             
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<Product>() ?? product;
+            return await response.Content.ReadFromJsonAsync<TaskRequestDto>() ?? taskItem;
         }
         catch (Exception ex)
         {
             // TODO: Add logging
-            return product;
+            return taskItem;
         }
     }
 
-    public async Task<bool> DeleteProductAsync(int id)
+    public async Task<bool> DeleteTaskAsync(int id)
     {
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{_apiBaseUrl}/products/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{_apiBaseUrl}/tasks/{id}");
             AddCorrelationIdHeader(request);
             
             var response = await _httpClient.SendAsync(request);
